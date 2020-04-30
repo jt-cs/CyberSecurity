@@ -1,0 +1,27 @@
+####Download and start DVWA Container####
+---
+  - name: Download and start dvwa container
+    hosts: webservers
+    become: true
+    tasks:
+
+    - name: Install docker.io
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Install python-pip
+      apt:
+        name: python-pip
+        state: present
+
+    - pip:
+        name: docker
+        state: present
+
+    - name: Create cyberxsecurity/dvwa container
+      docker_container:
+        name: dvwa
+        image: cyberxsecurity/dvwa
+        published_ports: 80:80
+        state: started

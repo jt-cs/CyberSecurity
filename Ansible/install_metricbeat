@@ -1,0 +1,26 @@
+###### METRICBEAT SETUP PLAYBOOK #########
+---
+- name: Installing and launching metricbeat
+  hosts: webservers
+  become: yes
+  tasks:
+
+  - name: download metricbeat deb
+    command: curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.4.0-amd64.deb
+ 
+  - name: install metricbeat deb
+    command: dpkg -i metricbeat-7.4.0-amd64.deb
+
+  - name: drop in metricbeat.yml 
+    copy:
+      src: ./metricbeat.yml
+      dest: /etc/metricbeat/
+
+  - name: enable and configure system module
+    command: sudo metricbeat modules enable docker
+
+  - name: setup metricbeat
+    command: sudo metricbeat setup
+
+  - name: start metricbeat service
+    command: sudo service metricbeat start
