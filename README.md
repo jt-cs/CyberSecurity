@@ -7,30 +7,9 @@ The files in this repository were used to configure the network depicted below.
 
 ![Network Diagram](https://github.com/jt-cs/CyberSecurity/blob/master/Diagrams/Azure_VM_Diagram.PNG)
 
-These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the playbook file may be used to install only certain pieces of it, such as Filebeat.
+[These files](https://github.com/jt-cs/CyberSecurity/tree/master/Ansible) have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the playbook file may be used to install only certain pieces of it, such as Filebeat.
 
- ---
-- name: Installing and launching filebeat
-  hosts: webservers
-  become: yes
-  tasks:
 
-  - name: download filebeat deb
-    command: curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.6.1-amd64.deb
-
-  - name: install filebeat deb
-    command: dpkg -i filebeat-7.6.1-amd64.deb
-
-  - name: drop in filebeat.yml
-    copy:
-      src: ./filebeat.yml
-      dest: /etc/filebeat/
-
-  - name: enable and configure system module
-    command: filebeat modules enable system
-
-  - name: setup filebeat
-    command: filebeat setup
 
 This document contains the following details:
 - Description of the Topology
@@ -47,7 +26,7 @@ The main purpose of this network is to expose a load-balanced and monitored inst
 -
 Load balancing ensures that the application will be highly available, in addition to restricting connections to the network.
 -
--Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the log data and system metrics.
+Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the log data and system metrics.
 -
 The configuration details of each machine may be found below.
 
